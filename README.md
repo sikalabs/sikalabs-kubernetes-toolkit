@@ -7,6 +7,13 @@
 - With consul `make install-ingress`
 - Without consul `make install-simple`
 
+## Consul
+
+### Install
+
+- `make helm-repos`
+- `make install-consul`
+
 ## Elastic stack
 
 ### Install
