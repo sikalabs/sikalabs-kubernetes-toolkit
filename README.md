@@ -1,5 +1,19 @@
 # sikalabs-kubernetes-toolkit
 
+## Elastic stack
+
+### Install
+
+- `make helm-repos`
+- `make setup-eck`
+- `make install-eck`
+
+### Kibana
+
+- URL: https://kibana.k8s.sikademo.com
+- User: `elastic`
+- Password: `make password-eck`
+
 ## Prometheus stack
 
 ### Install
