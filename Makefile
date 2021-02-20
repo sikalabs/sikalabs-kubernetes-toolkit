@@ -1,9 +1,12 @@
+PROMETHEUS_OPERATOR_VERSION = v0.45.0
 LONGHORN_VERSION = v1.1.0
 ECK_VERSION = 1.3.0
 
 helm-repos:
 	helm repo add ondrejsika https://helm.oxs.cz
 	helm repo add hashicorp https://helm.releases.hashicorp.com
+	helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+	helm repo add stable https://charts.helm.sh/stable
 	helm repo update
 
 install-maildev:
@@ -76,3 +79,34 @@ password-eck:
 	@kubectl -n elastic-stack get secret eck-es-elastic-user -o go-template='{{.data.elastic | base64decode}}'
 	@echo ""
 	@echo ""
+
+setup-prom:
+	kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/$(PROMETHEUS_OPERATOR_VERSION)/example/prometheus-operator-crd/monitoring.coreos.com_alertmanagers.yaml
+	kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/$(PROMETHEUS_OPERATOR_VERSION)/example/prometheus-operator-crd/monitoring.coreos.com_podmonitors.yaml
+	kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/$(PROMETHEUS_OPERATOR_VERSION)/example/prometheus-operator-crd/monitoring.coreos.com_prometheuses.yaml
+	kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/$(PROMETHEUS_OPERATOR_VERSION)/example/prometheus-operator-crd/monitoring.coreos.com_prometheusrules.yaml
+	kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/$(PROMETHEUS_OPERATOR_VERSION)/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml
+	kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/$(PROMETHEUS_OPERATOR_VERSION)/example/prometheus-operator-crd/monitoring.coreos.com_thanosrulers.yaml
+
+install-prom:
+	kubectl apply -f k8s/ns-prom.yml
+	helm upgrade --install \
+		prometheus-stack prometheus-community/kube-prometheus-stack \
+		-n prometheus-stack \
+		-f values/prom/general.yml \
+		-f valeus/prom/general-override.yml \
+		-f values/prom/ingress.yml \
+		-f values/prom/alertmanager-config.yml
+
+uninstall-prom:
+	helm uninstall prometheus-stack \
+		 -n prometheus-stack
+	kubectl delete -f k8s/ns-prom.yml
+
+prom-reload:
+	curl -X POST https://prometheus.k8s.sikademo.com/-/reload
+	curl -X POST https://alertmanager.k8s.sikademo.com/-/reload
+
+prom-copy-example-values:
+	cp values/prom/ingress.example.yml values/prom/ingress.yml
+	cp values/prom/alertmanager-config.example.yml values/prom/alertmanager-config.yml
