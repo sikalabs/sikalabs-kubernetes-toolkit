@@ -67,3 +67,12 @@ Our example dashboard: https://grafana.k8s.sikademo.com/d/ex01/example-dashboard
 
 - https://alertmanager.k8s.sikademo.com
 - Status - https://alertmanager.k8s.sikademo.com/#/status
+
+## MailDev (Email client)
+
+- URL: https://mail.k8s.sikademo.com
+
+### Install
+
+- `make helm-repos`
+- `make install-maildev`
