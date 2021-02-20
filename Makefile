@@ -1,3 +1,5 @@
+LONGHORN_VERSION = v1.1.0
+
 helm-repos:
 	helm repo add ondrejsika https://helm.oxs.cz
 	helm repo add hashicorp https://helm.releases.hashicorp.com
@@ -38,3 +40,15 @@ install-ingress-simple:
 
 uninstall-ingress-simple:
 	kubectl delete -f ingress/ingress-traefik.yml
+
+install-longhorn:
+	kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/$(LONGHORN_VERSION)/deploy/longhorn.yaml
+
+uninstall-longhorn:
+	kubectl delete -f https://raw.githubusercontent.com/longhorn/longhorn/$(LONGHORN_VERSION)/deploy/longhorn.yaml
+
+install-longhorn-ingress:
+	kubectl apply -f longhorn/longhorn-ingress.yml
+
+uninstall-longhorn-ingress:
+	kubectl delete -f longhorn/longhorn-ingress.yml
