@@ -5,10 +5,14 @@ helm-repos:
 
 install-maildev:
 	kubectl apply -f k8s/ns-maildev.yml
-	helm upgrade --install -n maildev maildev ondrejsika/maildev --set host=mail.k8s.sikademo.com
+	helm upgrade --install \
+		maildev ondrejsika/maildev \
+		-n maildev \
+		--set host=mail.k8s.sikademo.com
 
 uninstall-maildev:
-	helm uninstall maildev -n maildev
+	helm uninstall maildev \
+		-n maildev
 	kubectl delete -f k8s/ns-maildev.yml
 
 install-consul:
