@@ -30,16 +30,16 @@ uninstall-consul:
 	kubectl delete -f k8s/ns-consul.yml
 
 install-ingress:
-	kubectl apply -f ingress/ingress-traefik-consul.yml
+	kubectl apply -f k8s/ingress/ingress-traefik-consul.yml
 
 uninstall-ingress:
-	kubectl delete -f ingress/ingress-traefik-consul.yml
+	kubectl delete -f k8s/ingress/ingress-traefik-consul.yml
 
 install-ingress-simple:
-	kubectl apply -f ingress/ingress-traefik.yml
+	kubectl apply -f k8s/ingress/ingress-traefik.yml
 
 uninstall-ingress-simple:
-	kubectl delete -f ingress/ingress-traefik.yml
+	kubectl delete -f k8s/ingress/ingress-traefik.yml
 
 install-longhorn:
 	kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/$(LONGHORN_VERSION)/deploy/longhorn.yaml
