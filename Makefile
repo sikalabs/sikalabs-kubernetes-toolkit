@@ -26,3 +26,15 @@ uninstall-consul:
 	helm uninstall consul \
 		-n consul
 	kubectl delete -f k8s/ns-consul.yml
+
+install-ingress:
+	kubectl apply -f ingress/ingress-traefik-consul.yml
+
+uninstall-ingress:
+	kubectl delete -f ingress/ingress-traefik-consul.yml
+
+install-ingress-simple:
+	kubectl apply -f ingress/ingress-traefik.yml
+
+uninstall-ingress-simple:
+	kubectl delete -f ingress/ingress-traefik.yml
