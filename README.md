@@ -1,5 +1,12 @@
 # sikalabs-kubernetes-toolkit
 
+## Traefik ingress controller
+
+### Install
+
+- With consul `make install-ingress`
+- Without consul `make install-simple`
+
 ## Elastic stack
 
 ### Install
