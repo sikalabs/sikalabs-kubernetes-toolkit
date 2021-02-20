@@ -48,7 +48,7 @@ uninstall-longhorn:
 	kubectl delete -f https://raw.githubusercontent.com/longhorn/longhorn/$(LONGHORN_VERSION)/deploy/longhorn.yaml
 
 install-longhorn-ingress:
-	kubectl apply -f longhorn/longhorn-ingress.yml
+	kubectl apply -f k8s/longhorn/longhorn-ingress.yml
 
 uninstall-longhorn-ingress:
-	kubectl delete -f longhorn/longhorn-ingress.yml
+	kubectl delete -f k8s/longhorn/longhorn-ingress.yml
