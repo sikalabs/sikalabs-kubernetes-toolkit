@@ -14,6 +14,17 @@
 - `make helm-repos`
 - `make install-consul`
 
+## Longhorn
+
+### Install
+
+- `make install-longhorn`
+
+#### Optional
+
+- Make Longhorn default storage class `make make-longhorn-default-storageclass`
+- Longhorn public dashboard `make install-longhorn-ingress`
+
 ## Elastic stack
 
 ### Install
