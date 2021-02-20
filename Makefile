@@ -1,4 +1,5 @@
 LONGHORN_VERSION = v1.1.0
+ECK_VERSION = 1.3.0
 
 helm-repos:
 	helm repo add ondrejsika https://helm.oxs.cz
@@ -55,3 +56,23 @@ install-longhorn-ingress:
 
 uninstall-longhorn-ingress:
 	kubectl delete -f k8s/longhorn/longhorn-ingress.yml
+
+setup-eck:
+	kubectl apply -f https://download.elastic.co/downloads/eck/$(ECK_VERSION)/all-in-one.yaml
+
+install-eck:
+	kubectl apply -f k8s/ns-eck.yml
+	kubectl apply -f k8s/eck
+
+uninstall-eck:
+	kubectl delete -f k8s/eck
+	kubectl delete -f k8s/ns-eck.yml
+
+password-eck:
+	@echo "USER:"
+	@echo "elastic"
+	@echo ""
+	@echo "PASSWORD: "
+	@kubectl -n elastic-stack get secret eck-es-elastic-user -o go-template='{{.data.elastic | base64decode}}'
+	@echo ""
+	@echo ""

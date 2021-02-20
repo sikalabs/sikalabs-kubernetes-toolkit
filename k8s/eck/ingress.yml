@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: eck
+  namespace: elastic-stack
+spec:
+  rules:
+    - host: kibana.k8s.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: eck-kb-http
+                port:
+                  number: 5601
