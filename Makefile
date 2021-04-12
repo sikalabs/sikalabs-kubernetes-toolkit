@@ -110,3 +110,8 @@ prom-reload:
 prom-copy-example-values:
 	cp values/prom/ingress.example.yml values/prom/ingress.yml
 	cp values/prom/alertmanager-config.example.yml values/prom/alertmanager-config.yml
+
+delete-stuck-namespace:
+	kubectl get namespace "${ns}" -o json \
+  | tr -d "\n" | sed "s/\"finalizers\": \[[^]]\+\]/\"finalizers\": []/" \
+  | kubectl replace --raw /api/v1/namespaces/${ns}/finalize -f -
