@@ -1,6 +1,6 @@
 PROMETHEUS_OPERATOR_VERSION = v0.47.0
 LONGHORN_VERSION = v1.1.0
-ECK_VERSION = 1.4.0
+ECK_VERSION = 1.5.0
 
 helm-repos:
 	helm repo add ondrejsika https://helm.oxs.cz
