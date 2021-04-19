@@ -53,6 +53,10 @@ uninstall-longhorn:
 
 make-longhorn-default-storageclass:
 	kubectl patch storageclass longhorn -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+	
+do-make-longhorn-default-storageclass:
+	kubectl patch storageclass do-block-storage -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+	kubectl patch storageclass longhorn -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 
 install-longhorn-ingress:
 	kubectl apply -f k8s/longhorn/longhorn-ingress.yml
