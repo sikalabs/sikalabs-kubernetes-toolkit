@@ -98,7 +98,7 @@ install-prom:
 		prometheus-stack prometheus-community/kube-prometheus-stack \
 		-n prometheus-stack \
 		-f values/prom/general.yml \
-		-f valeus/prom/general-override.yml \
+		-f values/prom/general-override.yml \
 		-f values/prom/ingress.yml \
 		-f values/prom/alertmanager-config.yml
 
