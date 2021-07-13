@@ -1,6 +1,7 @@
 prometheus:
   ingress:
     enabled: true
+    pathType: Prefix
     hosts:
       - prometheus.k8s.sikademo.com # --- PROMETHEUS DOMAIN ---
     paths:
@@ -9,6 +10,7 @@ prometheus:
 grafana:
   ingress:
     enabled: true
+    pathType: Prefix
     annotations: {}
     hosts:
       - grafana.k8s.sikademo.com # --- GRAFANA DOMAIN ---
@@ -18,6 +20,7 @@ grafana:
 alertmanager:
   ingress:
     enabled: true
+    pathType: Prefix
     annotations: {}
     hosts:
       - alertmanager.k8s.sikademo.com # --- ALERTMANAGER DOMAIN ---
